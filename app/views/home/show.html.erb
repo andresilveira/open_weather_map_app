@@ -1,0 +1,8 @@
+<h1>The weather at: </h1>
+<% if @weather.empty? %>
+<p>Unknown City: here goes a fancy partial</p>
+<% else %>
+  <%= render "weather", weather: @weather %>
+<% end %>
+
+<%= link_to "&larr; Back".html_safe, root_path %>

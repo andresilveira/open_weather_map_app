@@ -28,7 +28,7 @@ class OpenWeatherMap
       uri
     end
     
-    def uri_weather_by_city(city_name, country_code="")
+    def uri_for_weather_by_city(city_name, country_code="")
       uri = API_URI
       uri.query = URI.encode_www_form({q: "#{city_name.to_s},#{country_code.to_s}"}.merge(DEFAULT_PARAMETERS))
       uri

@@ -28,7 +28,22 @@ class OpenWeatherMap
 
       def weather_by_coordinates(lat, lon)
         resp = ::JSON.parse(super(lat,lon))
-        
+        render_response(resp)
+      end
+      
+      private
+
+      def render_response(resp)
+        if resp["cod"].to_i == 200
+          render_successful_response(resp)
+        elsif resp["cod"].to_i == 404
+          render_not_found_response(resp)
+        else
+          raise Exception, "Unknown API response code"
+        end
+      end
+
+      def render_successful_response(resp)
         weather = resp["weather"].first
         main = resp["main"]
         sys = resp["sys"]
@@ -45,6 +60,10 @@ class OpenWeatherMap
           country:      sys["country"],         # country Code
           city:         resp["name"]            # city name
         }
+      end
+
+      def render_not_found_response(resp)
+        {}
       end
     end
   end

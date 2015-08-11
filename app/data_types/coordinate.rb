@@ -1,1 +1,2 @@
-Coordinate = Struct.new(:lat, :lon)
+class Coordinate < Struct.new(:lat, :lon)
+end

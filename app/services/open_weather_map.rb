@@ -66,8 +66,8 @@ class OpenWeatherMap
 
         {
           temperature:  main["temp"],           # depends on units
-          pressure:     main["pressure"],       # %
-          humidity:     main["humidity"],       # hPa
+          pressure:     main["pressure"],       # hPa
+          humidity:     main["humidity"],       # %
           description:  weather["description"], 
           icon:         weather["icon"],
           wind_speed:   resp["wind"]["speed"],  # m/s

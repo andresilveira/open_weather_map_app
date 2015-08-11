@@ -1,3 +1,14 @@
-<h1>Hello World</h1>
-
-<p>it is <%= @weather[:temperature] %></p>
+<% if @weather.empty? %>
+<p>Unknown City: here goes a fancy partial</p>
+<% else %>
+<h1>So, tell me how is the weather at <small><%= "#{@weather[:city]}, #{@weather[:country]} [#{@coords[:lat]}, #{@coords[:lon]} ]" %></small></h1>
+<h2>{icon: <%= @weather[:icon] %>}  <%= @weather[:description] %></h2>
+<ul> 
+  <li>Temperature: <%= @weather[:temperature] %> &#8451;</li>
+  <li>Pressure: <%= @weather[:pressure] %> hPa</li>
+  <li>Humidity: <%= @weather[:humidity] %> %</li>
+  <li>Wind Speed: <%= @weather[:wind_speed] %> m/s</li>
+  <li>Sunrise &uarr; <%=l Time.at(@weather[:sunrise].to_i), format: :super_short %> h</li>
+  <li>Sunset &darr; <%=l Time.at(@weather[:sunset].to_i), format: :super_short %> h</li>
+</ul>
+<% end %>

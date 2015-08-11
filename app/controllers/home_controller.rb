@@ -12,7 +12,7 @@ class HomeController < ApplicationController
   
   def random_coords
     # TODO: refactor this concept of coordinates to it's own class
-    @coords = Coordinate.new(lat: rand(-90..90), lon: rand(-180..180))
+    @coords = Coordinate.new(rand(-90..90), rand(-180..180))
   end
   
 end

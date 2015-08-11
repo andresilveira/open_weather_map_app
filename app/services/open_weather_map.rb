@@ -17,9 +17,20 @@ class OpenWeatherMap
       response.body if response.is_a?(Net::HTTPSuccess)
     end
     
+    def weather_by_city(city_name, country_code="")
+      response = Net::HTTP.get_response(uri_for_weather_by_city(city_name.to_s, country_code.to_s))
+      response.body if response.is_a?(Net::HTTPSuccess)
+    end
+    
     def uri_for_weather_by_coordinates(lat, lon)
       uri = API_URI
       uri.query = URI.encode_www_form({lat: lat.to_s, lon: lon.to_s}.merge(DEFAULT_PARAMETERS))
+      uri
+    end
+    
+    def uri_weather_by_city(city_name, country_code="")
+      uri = API_URI
+      uri.query = URI.encode_www_form({q: "#{city_name.to_s},#{country_code.to_s}"}.merge(DEFAULT_PARAMETERS))
       uri
     end
     
@@ -28,6 +39,11 @@ class OpenWeatherMap
 
       def weather_by_coordinates(lat, lon)
         resp = ::JSON.parse(super(lat,lon))
+        render_response(resp)
+      end
+      
+      def weather_by_city(city_name, country_code="")
+        resp = ::JSON.parse(super(city_name, country_code))
         render_response(resp)
       end
       

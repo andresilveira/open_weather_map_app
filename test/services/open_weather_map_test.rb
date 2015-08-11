@@ -25,6 +25,10 @@ describe OpenWeatherMap::API do
           @weather.keys.include?(attribute).must_equal true
         end
       end
+      
+      it 'should be empty in case the api dont find the city' do
+        @wrapper.weather_by_coordinates(9999,9999).empty?.must_equal true
+      end
     end
   end
 end

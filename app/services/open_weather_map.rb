@@ -34,7 +34,7 @@ class OpenWeatherMap
       uri
     end
     
-    class API::JSON < API
+    class JSON < API
       require 'json'
 
       def weather_by_coordinates(lat, lon)
